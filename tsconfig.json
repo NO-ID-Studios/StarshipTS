@@ -1,0 +1,26 @@
+{
+	"compilerOptions": {
+		"target": "ES2018",
+		"useDefineForClassFields": true,
+		"forceConsistentCasingInFileNames": true,
+		"rootDir": "./",
+		"module": "CommonJS",
+		"skipLibCheck": true,
+		"moduleResolution": "node",
+		"allowImportingTsExtensions": true,
+		"resolveJsonModule": true,
+		"noEmit": true,
+		"esModuleInterop": true,
+		"noImplicitAny": true,
+		"inlineSourceMap": true,
+		"baseUrl": ".",
+		"outDir": "dist/",
+		"strictPropertyInitialization": false,
+		"paths": {
+			"@/*": [ "./src/*" ],
+			"@plugins/*": [ "./plugins/*" ]
+		}
+	},
+	"include": [ "src", "plugins" ],
+	"exclude": [ "node_modules" ]
+}
