@@ -12,12 +12,12 @@ const logger = pino({
 	level: verbosity
 });
 
-const dmhDiscord = new Bot(logger);
+const starship = new Bot(logger);
 
 process.on("SIGINT", async () => {
 	logger.info("Gracefully shutting down...");
 
-	await dmhDiscord.shutdown();
+	await starship.shutdown();
 });
 
-dmhDiscord.start();
+starship.start();

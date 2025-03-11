@@ -1,7 +1,7 @@
 import { EmbedStatus } from "@/Types/Embed";
 import { EmbedBuilder } from "discord.js";
 
-export default class DmhEmbed {
+export default class Embed {
 	public static getBaseEmbedBuilder(): EmbedBuilder {
 		return new EmbedBuilder()
 			.setFooter({ text: "StarshipTS" })

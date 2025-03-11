@@ -1,4 +1,4 @@
-import DmhEmbed from "@/Core/Utils/Embed";
+import Embed from "@/Core/Utils/Embed";
 import { Interaction } from "@/Discord/Client";
 import Validator from "@/Core/Utils/Validator";
 import DiscordEvent from "@/Core/Listeners/DiscordListener";
@@ -16,7 +16,7 @@ export default class DiscordInteractionListener extends DiscordEvent {
 			const validatedFields = Validator.validate(interaction.fields);
 
 			if (validatedFields.length > 0) {
-				await interaction.reply({ embeds: [ DmhEmbed.getValidationErrorEmbed(validatedFields) ], flags: "Ephemeral" });
+				await interaction.reply({ embeds: [ Embed.getValidationErrorEmbed(validatedFields) ], flags: "Ephemeral" });
 
 				return;
 			}
