@@ -1,8 +1,6 @@
-import { config } from "dotenv";
+import EnvironmentConfig from "@/Core/Environment";
 
-config();
-
-const environment = process.env.APP_ENV;
+const environment = EnvironmentConfig.environment;
 
 export enum Environment {
 	DEVELOP = "develop",
