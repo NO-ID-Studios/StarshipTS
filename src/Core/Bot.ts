@@ -2,10 +2,11 @@ import { Logger } from "pino";
 import { config } from "dotenv";
 import { Sequelize } from "sequelize";
 import { Client } from "@/Discord/Client";
+import Environment from "@/Core/Environment";
 import { isDevelop } from "@/System/Environment";
 import PluginManager from "@/Core/Managers/PluginManager";
-import ChatCommandEvent from "@/Core/Listeners/DiscordInteractionListener";
 import WebServerService from "@/Core/Services/WebServerService";
+import ChatCommandEvent from "@/Core/Listeners/DiscordInteractionListener";
 import { ActivityType, Collection, Events, GatewayIntentBits, Guild, REST, Routes } from "discord.js";
 
 config();
@@ -21,11 +22,14 @@ export default class Bot {
 	private isShuttingDown = false;
 
 	constructor(protected logger: Logger) {
-		const { DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT } = process.env;
+		const {
+			discordAppId, guildId, discordToken, databaseName, databaseUser, databasePassword,
+			databaseHost, databasePort
+		} = Environment;
 
-		this.appId = process.env.DISCORD_APP_ID;
-		this.guildId = process.env.GUILD_ID;
-		this.discordToken = process.env.BOT_TOKEN;
+		this.appId = discordAppId;
+		this.guildId = guildId;
+		this.discordToken = discordToken;
 
 		this.client = new Client({
 			intents: [
@@ -37,10 +41,10 @@ export default class Bot {
 		});
 
 		this.client.commands = new Collection();
-		this.database = new Sequelize(DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, {
-			host: DATABASE_HOST,
+		this.database = new Sequelize(databaseName, databaseUser, databasePassword, {
+			host: databaseHost,
 			dialect: "mysql",
-			port: parseInt(DATABASE_PORT),
+			port: databasePort,
 			logging: isDevelop
 		});
 
@@ -63,7 +67,7 @@ export default class Bot {
 
 		this.client.login(this.discordToken)
 			.then(() => {
-				this.client.user.setActivity(process.env.DISCORD_ACTIVITY_MESSAGE, { type: ActivityType.Watching });
+				this.client.user.setActivity(Environment.activityMessage, { type: ActivityType.Watching });
 				this.webServerService.start();
 			});
 	}

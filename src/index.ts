@@ -1,14 +1,12 @@
 import pino from "pino";
 import Bot from "@/Core/Bot";
-import { config } from "dotenv";
 import { isDevelop } from "@/System/Environment";
+import Environment from "@/Core/Environment";
 
-config();
-
-const { BOT_NAME } = process.env;
+const { name } = Environment;
 const verbosity = isDevelop ? "debug" : "info";
 const logger = pino({
-	name: BOT_NAME,
+	name,
 	level: verbosity
 });
 
