@@ -6,7 +6,7 @@
 	"author": "NO-ID",
 	"license": "MIT",
 	"scripts": {
-		"start": "concurrently \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\""
+		"start": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\""
 	},
 	"devDependencies": {
 		"concurrently": "^9.1.2"
